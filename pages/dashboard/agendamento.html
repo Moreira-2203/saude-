@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamento | Saúde+</title>
+  <link rel="stylesheet" href="../../assets/css/agendamento.css">
+  <link rel="icon" href="../../assets/img/logo.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <section class="main-container">
+    <div class="left-info">
+      <img id="ag-img" src="" alt="Clínica" class="clinic-img">
+      <h2 id="ag-nome"></h2>
+      <p id="ag-endereco"></p>
+      <p>
+        <strong>Horário de Funcionamento:</strong><br>
+        <span id="ag-horario"></span>
+      </p>
+      <p id="ag-descricao"></p>
+
+      <div class="btn-block">
+        <button id="btnContato" class="btn-secondary">
+          Entre em contato <i class="fa-solid fa-envelope"></i>
+        </button>
+
+        <button id="btnMapa" class="btn-secondary">
+          Mostrar no mapa <i class="fa-solid fa-location-dot"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-box">
+      <form id="formAgendamento">
+        <label for="especialidade">Especialidade :</label>
+        <select id="especialidade" required>
+          <option value="">Selecione...</option>
+          <option value="ginecologia">Ginecologia</option>
+          <option value="obstetricia">Obstetrícia</option>
+          <option value="mastologia">Mastologia</option>
+        </select>
+
+        <label for="medico">Médico(a) :</label>
+        <select id="medico" required>
+          <option value="">Selecione uma especialidade</option>
+        </select>
+
+        <label for="data">Datas Disponíveis :</label>
+        <select id="data" required>
+          <option value="">Selecione um médico</option>
+        </select>
+
+        <label for="horario">Horários disponíveis :</label>
+        <select id="horario" required>
+          <option value="">Selecione uma data</option>
+        </select>
+
+        <button type="submit" class="btn-main">
+          Agendar Consulta <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+    </div>
+  </section>
+  <script src="../../assets/js/agendamento.js" defer></script>
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

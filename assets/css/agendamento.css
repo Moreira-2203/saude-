@@ -1,0 +1,252 @@
+/* =============================== */
+/* ESTILO BASE                     */
+/* =============================== */
+
+body {
+  background: #f8ffff;
+  font-family: Arial, sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* =============================== */
+/* HEADER                          */
+/* =============================== */
+
+header {
+  background-color: #b5faf0;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 4px solid #26ac98;
+  flex-wrap: wrap;
+}
+
+.logo img {
+  height: 60px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+nav a {
+  margin: 0 18px;
+  color: #0a6c63;
+  font-weight: bold;
+  text-decoration: none;
+  position: relative;
+}
+
+nav .active {
+  border-bottom: 2px solid #0a6c63;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+/* =============================== */
+/* ANIMAÇÃO DE ENTRADA HEADER/FOOTER */
+/* =============================== */
+
+header,
+footer {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.5s ease-in-out;
+}
+
+header.loaded,
+footer.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =============================== */
+/* FOOTER                          */
+/* =============================== */
+
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  color: #444;
+  margin-top: 200px;
+  font-style: italic;
+}
+
+/* =============================== */
+/* LAYOUT PRINCIPAL                */
+/* =============================== */
+
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px 50px;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+/* =============================== */
+/* COLUNA ESQUERDA (INFO CLÍNICA)  */
+/* =============================== */
+
+.left-info {
+  width: 45%;
+}
+
+.clinic-img {
+  width: 260px;
+  border-radius: 5px;
+}
+
+.left-info h2 {
+  margin: 10px 0;
+  color: #125f67;
+}
+
+.left-info p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #333;
+}
+
+.btn-block {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* =============================== */
+/* BOTÕES PRINCIPAIS               */
+/* =============================== */
+
+.btn-main,
+.btn-secondary {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-main {
+  background: #27b59a;
+}
+
+.btn-secondary {
+  background: #27b59a;
+}
+
+.btn-main:hover,
+.btn-secondary:hover {
+  transform: scale(1.05);
+}
+
+/* =============================== */
+/* FORMULÁRIO DE AGENDAMENTO (CARD) */
+/* =============================== */
+
+.form-box {
+  width: 45%;
+  background: #f8ffff;
+  border: 2px solid #b5faf0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+#formAgendamento {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#formAgendamento label {
+  font-weight: bold;
+  color: #125f67;
+}
+
+#formAgendamento select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  width: 100%;
+}
+
+#formAgendamento .btn-main {
+  margin-top: 15px;
+}
+
+/* =============================== */
+/* RESPONSIVIDADE                  */
+/* =============================== */
+
+@media (max-width: 992px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 30px 20px;
+  }
+
+  .left-info,
+  .form-box {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .clinic-img {
+    width: 80%;
+    max-width: 350px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .btn-block {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  nav a {
+    margin: 10px 0;
+  }
+
+  .btn-block {
+    flex-direction: column;
+  }
+
+  .form-box {
+    padding: 25px 20px;
+  }
+}

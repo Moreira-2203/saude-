@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro | Saúde+</title>
+  <link rel="icon" href="../../assets/img/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../../assets/css/register.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <script src="../../assets/js/register.js"></script>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-image"></div>
+
+    <div class="login-form">
+      <h2>Criar Conta</h2>
+
+      <form>
+        <div class="input-group">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" placeholder="Seu nome completo" required />
+        </div>
+
+        <div class="input-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="Seu e-mail" required />
+        </div>
+
+        <div class="input-group">
+          <label for="senha">Senha</label>
+          <div class="password-wrapper">
+            <input type="password" id="senha" placeholder="************" required />
+            <i class="fa-regular fa-eye"></i>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="confirmar-senha">Confirmar senha</label>
+          <div class="password-wrapper">
+            <input type="password" id="confirmar-senha" placeholder="************" required />
+            <i class="fa-regular fa-eye"></i>
+          </div>
+        </div>
+
+        <div class="checkbox-container">
+          <input type="checkbox" id="termos" required />
+          <label for="termos">Aceito os termos de uso e privacidade</label>
+        </div>
+
+        <button class="login-button" id="cadastro-btn" type="button">
+          <span class="text">CADASTRAR</span>
+          <span class="icon-circle">
+            <i class="fa-solid fa-user-plus"></i>
+          </span>
+        </button>
+
+        <div class="options">
+          <p>Já possui uma conta? <a href="login.html" class="register">Fazer login</a></p>
+        </div>
+      </form>
+
+      <div class="footer">
+        &copy; 2025 Saúde+. Todos os direitos reservados.
+      </div>
+    </div>
+  </div>
+
+  <script src = "../../assets/js/register.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Localização | Saúde+</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../../assets/css/localizacao.css">
+  <link rel="icon" href="../../assets/img/logo.png" type="image/png">
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+
+  <section class="content-wrapper">
+    <div class="info-container">
+      <img id="loc-img" class="clinic-img" src="" alt="Imagem da clínica">
+
+      <div class="info-text">
+        <h2 id="loc-nome"></h2>
+        <p id="loc-endereco"></p>
+        <p>
+          Horário de Funcionamento:
+          <strong id="loc-horario"></strong>
+        </p>
+        <p id="loc-descricao"></p>
+
+        <div class="btn-group">
+          <button id="btnContato" class="btn-secondary">
+            Entre em contato <i class="fa-brands fa-whatsapp"></i>
+          </button>
+          <button id="btnAgendar" class="btn-main">
+            Agendar Consulta <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-section">
+      <h3>Localização da clínica</h3>
+      <div id="map-box" class="map-box">
+        <p>Carregando mapa...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="../../assets/js/main.js"></script>
+  <script src="../../assets/js/localização.js"></script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+/* =============================== */
+/* RESET GERAL                     */
+/* =============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f8ffff;
+  color: #333;
+}
+
+/* =============================== */
+/* HEADER PADRONIZADO              */
+/* =============================== */
+header {
+  background-color: #b5faf0;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 4px solid #26ac98;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+  height: 60px;
+}
+
+nav a {
+  margin: 0 25px;
+  text-decoration: none;
+  color: #125f67;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover {
+  color: #1a8777;
+  transform: translateY(-2px);
+}
+
+nav .active {
+  border-bottom: 2px solid #1a8777;
+}
+
+/* =============================== */
+/* ÍCONES E MENUS DO HEADER        */
+/* =============================== */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  position: relative;
+}
+
+.dropdown-container,
+.logout-dropdown-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-header,
+.logout-dropdown-header {
+  font-size: 22px;
+  color: #125f67;
+}
+
+.dropdown-menu,
+.logout-dropdown-menu {
+  position: absolute;
+  top: 65px;
+  right: 0;
+  background-color: #f8ffff;
+  border: 2px solid #26ac98;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu.show,
+.logout-dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-menu a,
+.logout-dropdown-menu a {
+  display: block;
+  background: #e9fefe;
+  color: #125f67;
+  text-decoration: none;
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #b5faf0;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.dropdown-menu a:last-child,
+.logout-dropdown-menu a:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu a:hover,
+.logout-dropdown-menu a:hover {
+  background-color: #b5faf0;
+  color: #000;
+}
+
+.hidden {
+  display: none;
+}
+
+/* =============================== */
+/* ÁREA DE PESQUISA                */
+/* =============================== */
+.search-area {
+  text-align: center;
+  margin: 40px 0 20px 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #125f67;
+}
+
+.search-area label {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.search-box {
+  width: 450px;
+  max-width: 90%;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  background: #fff;
+  border-radius: 30px;
+  overflow: hidden;
+  border: 1px solid #b5faf0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.search-box button {
+  width: 55px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #1a8777;
+  transition: color 0.3s ease;
+}
+
+.search-box button:hover {
+  color: #125f67;
+}
+
+/* =============================== */
+/* CARD DE CLÍNICA / RESULTADOS    */
+/* =============================== */
+.card-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  flex: 1 0 auto;
+  margin-top: 20px;
+}
+
+.card {
+  width: 80%;
+  max-width: 900px;
+  background: #fff;
+  border: 2px solid #b5faf0;
+  display: flex;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-img {
+  width: 300px;
+  border-radius: 8px;
+}
+
+.card-info {
+  margin-left: 35px;
+  font-size: 16px;
+  color: #333;
+}
+
+.card-info h2 {
+  margin-bottom: 10px;
+  color: #1a8777;
+}
+
+.card-info p {
+  margin: 6px 0;
+}
+
+/* =============================== */
+/* BOTÕES PADRONIZADOS             */
+/* =============================== */
+.btn-main,
+.btn-secondary {
+  background: #27b59a;
+  border: 2px solid #27b59a;
+  color: #fff;
+  padding: 12px 30px;
+  cursor: pointer;
+  border-radius: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+  min-width: 180px;
+}
+
+.btn-main:hover,
+.btn-secondary:hover {
+  background: #1f917e;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* =============================== */
+/* BOTÃO SUPERIOR (AGENDAR)        */
+/* =============================== */
+.btn-top {
+  display: flex;
+  justify-content: center;  /* centraliza no card */
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+/* =============================== */
+/* GRUPO DE BOTÕES INFERIOR        */
+/* =============================== */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;                /* espaçamento entre os dois botões */
+  margin-top: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;          /* quebra linha se necessário */
+}
+
+.btn-group .btn-secondary {
+  background: #27b59a;
+}
+
+.btn-group .btn-secondary:hover {
+  background: #125f67;
+}
+
+/* Espaçamento vertical entre texto e botões */
+.card-info p:last-of-type {
+  margin-bottom: 25px; /* cria distância entre o último texto e o botão "Agendar consulta" */
+}
+
+.btn-top {
+  margin-top: 30px; /* garante espaçamento leve acima do botão */
+}
+
+
+/* =============================== */
+/* FOOTER FIXADO AO FINAL          */
+/* =============================== */
+footer {
+  text-align: center;
+  padding: 18px 20px;
+  font-size: 14px;
+  color: #125f67;
+  font-style: italic;
+  width: 100%;
+  flex-shrink: 0;
+  margin-top: auto;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
+}

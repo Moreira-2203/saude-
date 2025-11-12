@@ -1,0 +1,284 @@
+body {
+  background: #f8ffff;
+  color: #333;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.top-menu {
+  background: #b5faf0;
+  width: 100%;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 4px solid #26ac98;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
+}
+
+.top-menu nav ul {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+  margin: 0;
+  padding: 0;
+}
+
+.top-menu nav ul a {
+  text-decoration: none;
+  color: #0a6c63;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.top-menu nav ul a:hover {
+  color: #125f67;
+}
+
+.top-menu nav .active {
+  border-bottom: 2px solid #26ac98;
+}
+
+.user-actions img {
+  width: 35px;
+  margin-left: 18px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.user-actions img:hover {
+  transform: scale(1.1);
+}
+
+.container-contato {
+  margin: 50px auto;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+}
+
+.info-clinica {
+  width: 45%;
+}
+
+.info-clinica h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #125f67;
+  margin-bottom: 10px;
+}
+
+.titulo-clinica {
+  margin-bottom: 10px;
+  color: #125f67;
+  font-size: 20px;
+}
+
+.info-clinica p {
+  font-size: 15px;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.card-clinica {
+  background: #f8ffff;
+  border: 2px solid #b5faf0;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-clinica:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-clinica img {
+  width: 350px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+.card-clinica p {
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.btns-contato {
+  margin-top: 15px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btns-contato .btn {
+  flex: 1;
+  background: #27b59a;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btns-contato .btn:hover {
+  transform: scale(1.05);
+  background: #32c9bd;
+}
+
+.acoes {
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.btn-agendar,
+.btn-mapa {
+  background: #27b59a;
+  text-decoration: none;
+  color: #fff;
+  font-size: 15px;
+  padding: 12px 25px;
+  border-radius: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.3s ease, background 0.3s ease;
+  min-width: 160px;
+}
+
+.btn-mapa {
+  background: #45c7c7;
+}
+
+.btn-agendar:hover,
+.btn-mapa:hover {
+  transform: scale(1.05);
+}
+
+.form-contato {
+  width: 50%;
+  background: #f8ffff;
+  border: 2px solid #b5faf0;
+  border-radius: 10px;
+  padding: 30px 35px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-contato:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.form-contato label {
+  display: block;
+  font-weight: bold;
+  color: #125f67;
+  margin-bottom: 8px;
+}
+
+.form-contato input,
+.form-contato textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  background: #fff;
+}
+
+textarea {
+  height: 120px;
+  resize: none;
+}
+
+.linha {
+  display: flex;
+  gap: 20px;
+}
+
+.btn-enviar {
+  width: 100%;
+  background: #27b59a;
+  color: #fff;
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-enviar:hover {
+  transform: scale(1.05);
+  background: #1a8777;
+}
+
+footer {
+  text-align: center;
+  margin-top: 60px;
+  padding: 18px;
+  font-size: 13px;
+  color: #444;
+}
+
+@media (max-width: 950px) {
+  .container-contato {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-clinica,
+  .form-contato {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .acoes {
+    justify-content: center;
+  }
+
+  .card-clinica img {
+    max-width: 80%;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+@media (max-width: 600px) {
+  .linha {
+    flex-direction: column;
+  }
+
+  .top-menu nav ul {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btns-contato {
+    flex-direction: column;
+  }
+
+  .btns-contato .btn {
+    width: 100%;
+  }
+}

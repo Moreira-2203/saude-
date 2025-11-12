@@ -1,0 +1,63 @@
+@import url('login.css');
+
+.login-form h2 {
+  font-size: 26px;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 45px;
+  padding-left: 20px;
+  border: 2px solid #000;
+  border-radius: 25px;
+  font-size: 16px;
+  outline: none;
+  height: 45px;
+  box-sizing: border-box;
+}
+
+.password-wrapper i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #555;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.password-wrapper i:hover {
+  color: #26ac98;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+.options {
+  width: 100%;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.options a {
+  color: #26ac98;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.options a:hover {
+  text-decoration: underline;
+}

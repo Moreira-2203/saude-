@@ -1,0 +1,217 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #069e9e;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+header{
+  text-align: center;
+  margin-top: 50px;
+  position: relative;
+  text-align: center;
+}
+
+.botao-login {
+  position: absolute;
+  top: 0;
+  left: 92%;
+  padding: 10px 20px;
+  background-color: #007d86;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.botao-login:hover {
+  background-color: #00b3b3;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60vh;
+  margin-left: 100px;
+}
+
+.text-content {
+  max-width: 40%;
+  margin-top: 250px;
+}
+
+.text-content h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.text-content p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.text-content ul {
+  list-style: none;
+  padding: 0;
+  line-height: 1.8rem;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.logo-fundo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 90%;
+  opacity: 0.2;
+}
+
+.phones {
+  position: relative;
+  width: 55%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 70px;
+  margin-right: 500px;
+  left: 13%;
+}
+
+.phone-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.phone {
+  height: 350px;
+  width: auto;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+}
+
+.phone-left {
+  position: relative;
+  transform-origin: bottom center;
+  animation: slideLeft 1.3s ease forwards;
+  animation-delay: 0.3s;
+  z-index: 1;
+}
+
+.phone-center {
+  position: absolute;
+  transform-origin: bottom center;
+  animation: slideCenter 1.3s ease forwards;
+  animation-delay: 0.6s;
+  z-index: 3;
+  width: 180px;
+}
+
+.phone-right {
+  position: relative;
+  transform-origin: bottom center;
+  animation: slideRight 1.3s ease forwards;
+  animation-delay: 0.9s;
+  z-index: 2;
+}
+
+.shadow {
+  position: absolute;
+  bottom: -10px;
+  width: 120%;
+  height: 25px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.05) 70%,
+    transparent 100%
+  );
+  filter: blur(4px);
+  transform: perspective(400px) rotateX(80deg);
+  opacity: 0;
+  animation: fadeInShadow 1.3s ease forwards;
+}
+
+.phone-wrapper.left .shadow {
+  animation-delay: 0.3s;
+}
+
+.phone-wrapper.center .shadow {
+  animation-delay: 0.6s;
+}
+
+.phone-wrapper.right .shadow {
+  animation-delay: 0.9s;
+}
+
+.acessibilidade-bloco {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 300px;
+  margin-right: 100px;
+}
+
+.acessibilidade {
+  width: 150px;
+  margin: 0;
+}
+
+.logo-lado {
+  width: 100px;
+  margin-top: 20px;
+}
+
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(400px) rotate(0deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) rotate(-15deg);
+    opacity: 1;
+  }
+}
+
+@keyframes slideCenter {
+  0% {
+    transform: translateX(400px) rotate(0deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(400px) rotate(0deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) rotate(15deg);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInShadow {
+  from { opacity: 0; transform: scaleX(0.7); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 110px;
+}

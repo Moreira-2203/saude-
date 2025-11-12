@@ -1,0 +1,109 @@
+
+body {
+    background: #f8ffff;
+}
+
+
+header nav a {
+    margin: 0 18px;
+    color: #0a6c63;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logo{
+    height: 70px;
+}
+
+.icons-header i {
+    font-size: 22px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 50px;
+}
+
+.info-container {
+    width: 40%;
+}
+
+.clinic-img {
+    width: 260px;
+    border-radius: 5px;
+}
+
+.info-text {
+    margin: 18px 0;
+}
+
+.info-text h2 {
+    margin-bottom: 10px;
+    color: #125f67;
+}
+
+.info-text p {
+    margin: 6px 0;
+    font-size: 15px;
+    color: #333;
+}
+
+.btn-group {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-main,
+.btn-secondary {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-secondary {
+    background: #27b59a;
+    
+}
+
+.btn-main {
+    background: #27b59a;
+}
+
+.map-section {
+    width: 55%;
+    text-align: center;
+}
+
+.map-section h3 {
+    margin-bottom: 15px;
+    color: #1b4e54;
+}
+
+.map-box img {
+    width: 80%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+}
+
+
+footer {
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    margin-top: 35px;
+    color: #444;
+    margin-top: 200px;
+}

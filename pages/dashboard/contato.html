@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato | Saúde+</title>
+
+  <link rel="stylesheet" href="../../assets/css/contato.css">
+  <link rel="icon" href="../../assets/img/logo.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="container-contato">
+    <div class="info-clinica">
+      <h2>Entre em contato</h2>
+      <p>Preencha o formulário abaixo que responderemos em breve.</p>
+
+      <div class="card-clinica">
+        <h3 id="ct-nome" class="titulo-clinica"></h3>
+
+        <img id="ct-img" src="" alt="Clínica">
+
+        <p id="ct-endereco" class="endereco"></p>
+        <p>
+          <strong>Horário de Funcionamento:</strong>
+          <span id="ct-horario"></span>
+        </p>
+        <p id="ct-descricao" class="descricao"></p>
+
+        <div class="btns-contato">
+          <button id="btnLigar" class="btn ligar">📞 Ligar</button>
+          <button id="btnWhatsapp" class="btn whatsapp">💬 Whatsapp</button>
+          <button id="btnEmail" class="btn email">✉️ E-mail</button>
+        </div>
+      </div>
+    </div>
+
+    <form class="form-contato" id="formContato">
+      <label>
+        Nome
+        <input type="text" placeholder="Seu nome completo" required>
+      </label>
+
+      <div class="linha">
+        <label>
+          E-mail
+          <input type="email" placeholder="Seu@email.com" required>
+        </label>
+        <label>
+          Telefone
+          <input type="tel" placeholder="+55 (21) 99999-9999">
+        </label>
+      </div>
+
+      <label>
+        Assunto
+        <input type="text" placeholder="Ex.: dúvida sobre consulta, informações sobre exames" required>
+      </label>
+
+      <label>
+        Mensagem
+        <textarea placeholder="Escreva sua mensagem..." required></textarea>
+      </label>
+
+      <button type="submit" class="btn-enviar">Enviar para a clínica</button>
+    </form>
+  </main>
+
+  <script src="../../assets/js/main.js"></script>
+  <script src="../../assets/js/contato.js"></script>
+</body>
+</html>
