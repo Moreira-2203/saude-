@@ -12,12 +12,9 @@ function fixAbsoluteAssetPaths(html, base) {
 }
 
 async function loadMainLayout() {
-  const base = getBasePath();
+  const base = '/';
   const htmlPath = `${base}components/main.html`;
   const cssPath = `${base}assets/css/main.css`;
-
-  console.log('[layout] Base path:', base);
-  console.log('[layout] Carregando:', htmlPath);
 
   try {
     const response = await fetch(htmlPath, { cache: 'no-store' });

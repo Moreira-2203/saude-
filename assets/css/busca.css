@@ -1,6 +1,4 @@
-/* =============================== */
-/* RESET GERAL                     */
-/* =============================== */
+
 * {
   margin: 0;
   padding: 0;
@@ -16,9 +14,7 @@ html, body {
   color: #333;
 }
 
-/* =============================== */
-/* HEADER PADRONIZADO              */
-/* =============================== */
+
 header {
   background-color: #b5faf0;
   padding: 20px 40px;
@@ -50,9 +46,6 @@ nav .active {
   border-bottom: 2px solid #1a8777;
 }
 
-/* =============================== */
-/* ÍCONES E MENUS DO HEADER        */
-/* =============================== */
 .header-icons {
   display: flex;
   align-items: center;
@@ -126,9 +119,6 @@ nav .active {
   display: none;
 }
 
-/* =============================== */
-/* ÁREA DE PESQUISA                */
-/* =============================== */
 .search-area {
   text-align: center;
   margin: 40px 0 20px 0;
@@ -177,9 +167,7 @@ nav .active {
   color: #125f67;
 }
 
-/* =============================== */
-/* CARD DE CLÍNICA / RESULTADOS    */
-/* =============================== */
+
 .card-container {
   display: flex;
   justify-content: center;
@@ -225,9 +213,7 @@ nav .active {
   margin: 6px 0;
 }
 
-/* =============================== */
-/* BOTÕES PADRONIZADOS             */
-/* =============================== */
+
 .btn-main,
 .btn-secondary {
   background: #27b59a;
@@ -253,27 +239,23 @@ nav .active {
   transform: scale(1.05);
 }
 
-/* =============================== */
-/* BOTÃO SUPERIOR (AGENDAR)        */
-/* =============================== */
+
 .btn-top {
   display: flex;
-  justify-content: center;  /* centraliza no card */
+  justify-content: center;  
   margin-top: 15px;
   margin-bottom: 10px;
 }
 
-/* =============================== */
-/* GRUPO DE BOTÕES INFERIOR        */
-/* =============================== */
+
 .btn-group {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 25px;                /* espaçamento entre os dois botões */
+  gap: 25px;                
   margin-top: 10px;
   margin-bottom: 8px;
-  flex-wrap: wrap;          /* quebra linha se necessário */
+  flex-wrap: wrap;          
 }
 
 .btn-group .btn-secondary {
@@ -284,19 +266,16 @@ nav .active {
   background: #125f67;
 }
 
-/* Espaçamento vertical entre texto e botões */
+
 .card-info p:last-of-type {
-  margin-bottom: 25px; /* cria distância entre o último texto e o botão "Agendar consulta" */
+  margin-bottom: 25px; 
 }
 
 .btn-top {
-  margin-top: 30px; /* garante espaçamento leve acima do botão */
+  margin-top: 30px; 
 }
 
 
-/* =============================== */
-/* FOOTER FIXADO AO FINAL          */
-/* =============================== */
 footer {
   text-align: center;
   padding: 18px 20px;
