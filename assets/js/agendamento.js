@@ -1,29 +1,50 @@
-const clinicas = [
-  {
-    id: "clinicamulher",
-    nome: "Clínica da Mulher",
-    endereco: "Tv. Arildo Ferreira Da Silva, 5 - Barreira",
-    horario: "07h da manhã às 17h da tarde",
-    descricao: "Clínica Municipal especializada em Atenção Integral à Saúde da Mulher do município de Saquarema.",
-    imagem: "../../assets/img/clinicadamulher.jpg",
-    whatsapp: "5522999611638",
-    telefone: "5522999611638",
-    email: "contato@clinicadamulher.com"
-  },
-  {
-    id: "capsad",
-    nome: "Centro de Atenção Psicossocial de Saquarema – CAPS AD",
-    endereco: "Rua Adolfo Bravo, n° 28 - Bacaxá",
-    horario: "08h da manhã às 17h da tarde",
-    descricao: "Clínica de Saúde especializada em atendimento psicossocial.",
-    imagem: "../../assets/img/caps.png",
-    whatsapp: "5522999999999",
-    telefone: "5522999999999",
-    email: "contato@capsad.com"
-  }
-];
+function mapClinic(apiClinic) {
+  return {
+    id: apiClinic.id,
+    nome: apiClinic.name,
+    endereco: apiClinic.address,
+    horario: apiClinic.hours,
+    descricao: apiClinic.description,
+    imagem: apiClinic.image_url,
+    whatsapp: apiClinic.contact_whatsapp,
+    telefone: apiClinic.contact_phone,
+    email: apiClinic.contact_email,
+  };
+}
 
-document.addEventListener("DOMContentLoaded", () => {
+async function getClinicById(clinicaId) {
+  const response = await fetch('/api/clinics', { credentials: 'include' });
+  if (!response.ok) {
+    throw new Error('Falha ao carregar clínicas.');
+  }
+  const data = await response.json();
+  const clinics = Array.isArray(data) ? data.map(mapClinic) : [];
+  return clinics.find(c => c.id === clinicaId) || null;
+}
+
+async function createAppointment(payload) {
+  const response = await fetch('/api/appointments', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    let message = 'Falha ao agendar consulta.';
+    try {
+      const data = await response.json();
+      if (data && data.detail) message = data.detail;
+    } catch (err) {
+      message = 'Falha ao agendar consulta.';
+    }
+    throw new Error(message);
+  }
+
+  return response.json();
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
   const especialidadeSelect = document.getElementById("especialidade");
   const medicoSelect = document.getElementById("medico");
   const dataSelect = document.getElementById("data");
@@ -34,7 +55,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const params = new URLSearchParams(window.location.search);
   const clinicaId = params.get("clinica") || localStorage.getItem("selectedClinica");
-  const clinicaSelecionada = clinicas.find(c => c.id === clinicaId);
+  let clinicaSelecionada = null;
+  if (clinicaId) {
+    try {
+      clinicaSelecionada = await getClinicById(clinicaId);
+    } catch (err) {
+      console.warn("[Agendamento] Falha ao carregar clínica:", err);
+    }
+  }
 
   if (clinicaSelecionada) {
     localStorage.setItem("selectedClinica", clinicaSelecionada.id);
@@ -119,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const esp = especialidadeSelect.value;
@@ -132,24 +160,32 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const novoAgendamento = {
-      clinica: clinicaSelecionada ? clinicaSelecionada.nome : "Clínica não identificada",
-      especialidade: esp,
-      medico: med,
-      data: dat,
-      horario: hor,
-      criadoEm: new Date().toLocaleString()
-    };
+    if (!clinicaSelecionada) {
+      alert("⚠️ Clínica não identificada.");
+      return;
+    }
 
-    const agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || [];
-    agendamentos.push(novoAgendamento);
-    localStorage.setItem("agendamentos", JSON.stringify(agendamentos));
-
-    alert("✅ Consulta agendada com sucesso!");
-    form.reset();
-
-    setTimeout(() => {
-      window.location.href = "../../pages/dashboard/minha_area.html";
-    }, 1000);
+    try {
+      await createAppointment({
+        clinic_id: clinicaSelecionada.id,
+        doctor_name: med,
+        specialty: esp,
+        date: dat,
+        time: hor,
+        status: 'agendado',
+      });
+      alert("✅ Consulta agendada com sucesso!");
+      form.reset();
+      setTimeout(() => {
+        window.location.href = "../../pages/dashboard/minha_area.html";
+      }, 500);
+    } catch (err) {
+      const text = err instanceof Error ? err.message : 'Falha ao agendar consulta.';
+      if (text.toLowerCase().includes('not authenticated')) {
+        window.location.href = "../../pages/login/login.html";
+        return;
+      }
+      alert(text);
+    }
   });
 });

@@ -194,6 +194,16 @@ td {
   margin-top: 15px;
 }
 
+.exam-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.exam-form .form-row {
+  margin-bottom: 0;
+}
+
 body,
 header,
 .container,

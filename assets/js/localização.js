@@ -1,51 +1,65 @@
-const clinicas = [
-  {
-    id: "clinicamulher",
-    nome: "Clínica da Mulher",
-    endereco: "Tv. Arildo Ferreira Da Silva, 5 - Barreira, Saquarema - RJ",
-    horario: "07h às 17h",
-    descricao: "Clínica Municipal especializada em Atenção Integral à Saúde da Mulher do município de Saquarema.",
-    imagem: "../../assets/img/clinicadamulher.jpg",
-    whatsapp: "5522999611638"
-  },
-  {
-    id: "capsad",
-    nome: "Centro de Atenção Psicossocial de Saquarema – CAPS AD",
-    endereco: "Rua Adolfo Bravo, 28 - Bacaxá, Saquarema - RJ",
-    horario: "08h às 17h",
-    descricao: "Unidade especializada em saúde mental, oferecendo atendimento psicossocial e acompanhamento contínuo aos moradores de Saquarema.",
-    imagem: "../../assets/img/caps.png",
-    whatsapp: "5522999999999"
+function mapClinic(apiClinic) {
+  return {
+    id: apiClinic.id,
+    nome: apiClinic.name,
+    endereco: apiClinic.address,
+    horario: apiClinic.hours,
+    descricao: apiClinic.description,
+    imagem: apiClinic.image_url,
+  };
+}
+
+async function getClinicById(clinicaId) {
+  const response = await fetch('/api/clinics', { credentials: 'include' });
+  if (!response.ok) {
+    throw new Error('Falha ao carregar clínicas.');
   }
-];
+  const data = await response.json();
+  const clinics = Array.isArray(data) ? data.map(mapClinic) : [];
+  return clinics.find(c => c.id === clinicaId) || null;
+}
 
 document.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  const clinicaId = params.get("clinica") || localStorage.getItem("selectedClinica");
-  const clinica = clinicas.find(c => c.id === clinicaId);
+  (async () => {
+    const params = new URLSearchParams(window.location.search);
+    const clinicaId = params.get("clinica") || localStorage.getItem("selectedClinica");
 
-  if (!clinica) {
-    document.getElementById("map-box").innerHTML = "<p>Clínica não encontrada.</p>";
-    return;
-  }
+    if (!clinicaId) {
+      document.getElementById("map-box").innerHTML = "<p>Clínica não encontrada.</p>";
+      return;
+    }
 
-  localStorage.setItem("selectedClinica", clinica.id);
+    let clinica = null;
+    try {
+      clinica = await getClinicById(clinicaId);
+    } catch (err) {
+      document.getElementById("map-box").innerHTML = "<p>Não foi possível carregar a clínica.</p>";
+      return;
+    }
 
-  document.getElementById("loc-img").src = clinica.imagem;
-  document.getElementById("loc-nome").textContent = clinica.nome;
-  document.getElementById("loc-endereco").textContent = clinica.endereco;
-  document.getElementById("loc-horario").textContent = clinica.horario;
-  document.getElementById("loc-descricao").textContent = clinica.descricao;
+    if (!clinica) {
+      document.getElementById("map-box").innerHTML = "<p>Clínica não encontrada.</p>";
+      return;
+    }
 
-  document.getElementById("btnContato").onclick = () => {
-    window.location.href = `../../pages/dashboard/contato.html?clinica=${clinica.id}`;
-  };
+    localStorage.setItem("selectedClinica", clinica.id);
 
-  document.getElementById("btnAgendar").onclick = () => {
-    window.location.href = `../../pages/dashboard/agendamento.html?clinica=${clinica.id}`;
-  };
+    document.getElementById("loc-img").src = clinica.imagem;
+    document.getElementById("loc-nome").textContent = clinica.nome;
+    document.getElementById("loc-endereco").textContent = clinica.endereco;
+    document.getElementById("loc-horario").textContent = clinica.horario;
+    document.getElementById("loc-descricao").textContent = clinica.descricao;
 
-  mostrarRotaCompleta(clinica);
+    document.getElementById("btnContato").onclick = () => {
+      window.location.href = `../../pages/dashboard/contato.html?clinica=${clinica.id}`;
+    };
+
+    document.getElementById("btnAgendar").onclick = () => {
+      window.location.href = `../../pages/dashboard/agendamento.html?clinica=${clinica.id}`;
+    };
+
+    mostrarRotaCompleta(clinica);
+  })();
 });
 
 function mostrarRotaCompleta(clinica) {

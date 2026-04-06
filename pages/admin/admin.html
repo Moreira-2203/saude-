@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Painel do Administrador | Saúde+</title>
-  <link rel="stylesheet" href="../../assets/css/admin.css"/>>
+  <link rel="stylesheet" href="../../assets/css/admin.css"/>
 </head>
 <body>
   <header>
@@ -14,6 +14,7 @@
     <nav>
       <a href="#" class="active" data-tab="users">Gerenciar Usuários</a>
       <a href="#" data-tab="clinics">Gerenciar Clínicas</a>
+      <a href="#" data-tab="exams">Gerenciar Exames</a>
       <a href="#" data-tab="report">Emitir Relatório</a>
     </nav>
     <div class="icons">
@@ -64,15 +65,76 @@
       </div>
       <div id="reportTableWrap"></div>
     </section>
+
+    <section id="exams" class="panel" style="display:none">
+      <div class="panel-header">
+        <h3>Enviar Exame</h3>
+      </div>
+      <div class="exam-form">
+        <div class="form-row">
+          <label>Paciente</label>
+          <select id="examPatient" class="select"></select>
+        </div>
+        <div class="form-row">
+          <label>Nome do Exame</label>
+          <input id="examName" type="text" />
+        </div>
+        <div class="form-row">
+          <label>Laboratório</label>
+          <input id="examLab" type="text" />
+        </div>
+        <div class="form-row">
+          <label>Arquivo</label>
+          <input id="examFile" type="file" accept=".pdf,.png,.jpg,.jpeg" />
+        </div>
+      </div>
+      <div class="modal-actions" style="margin-top: 10px;">
+        <button id="uploadExam" class="btn primary">Enviar</button>
+      </div>
+
+      <div class="panel-header" style="margin-top: 20px;">
+        <h3>Exames do Paciente</h3>
+      </div>
+      <div id="examListWrap"></div>
+    </section>
   </main>
 
   <div id="modal" style="display:none">
     <div class="modal-backdrop">
       <div class="modal">
-        <h4>Adicionar Clínica</h4>
+        <h4 id="clinicModalTitle">Adicionar Clínica</h4>
+        <input id="clinicId" type="hidden" />
         <div class="form-row">
           <label>Nome da Clínica</label>
           <input id="clinicName" type="text" />
+        </div>
+        <div class="form-row">
+          <label>Endereço</label>
+          <input id="clinicAddress" type="text" />
+        </div>
+        <div class="form-row">
+          <label>Horário</label>
+          <input id="clinicHours" type="text" placeholder="07h-17h" />
+        </div>
+        <div class="form-row">
+          <label>Descrição</label>
+          <input id="clinicDescription" type="text" />
+        </div>
+        <div class="form-row">
+          <label>Imagem (URL)</label>
+          <input id="clinicImage" type="text" placeholder="/assets/img/clinic.png" />
+        </div>
+        <div class="form-row">
+          <label>Telefone</label>
+          <input id="clinicPhone" type="text" />
+        </div>
+        <div class="form-row">
+          <label>Whatsapp</label>
+          <input id="clinicWhatsapp" type="text" />
+        </div>
+        <div class="form-row">
+          <label>Email</label>
+          <input id="clinicEmail" type="email" />
         </div>
         <div class="form-row">
           <label>CNPJ</label>

@@ -1,58 +1,71 @@
-const clinicas = [
-  {
-    id: "clinicamulher",
-    nome: "Clínica da Mulher",
-    endereco: "Tv. Arildo Ferreira Da Silva, 5 - Barreira",
-    horario: "07h da manhã às 17h da tarde",
-    descricao: "Clínica Municipal especializada em Atenção Integral à Saúde da Mulher, oferecendo serviços de ginecologia, obstetrícia, prevenção e acompanhamento médico.",
-    imagem: "../../assets/img/clinicadamulher.jpg",
-    whatsapp: "5522999999999",
-    telefone: "5522999999999",
-    email: "contato@clinicadamulher.com"
-  },
-  {
-    id: "capsad",
-    nome: "Centro de Atenção Psicossocial de Saquarema – CAPS AD",
-    endereco: "Rua Adolfo Bravo, n° 28 - Bacaxá",
-    horario: "08h da manhã às 17h da tarde",
-    descricao: "Unidade especializada em saúde mental, oferecendo atendimento psicossocial, apoio terapêutico e acompanhamento contínuo aos moradores de Saquarema.",
-    imagem: "../../assets/img/caps.png",
-    whatsapp: "5522999999999",
-    telefone: "5522999999999",
-    email: "contato@capsad.com"
+function mapClinic(apiClinic) {
+  return {
+    id: apiClinic.id,
+    nome: apiClinic.name,
+    endereco: apiClinic.address,
+    horario: apiClinic.hours,
+    descricao: apiClinic.description,
+    imagem: apiClinic.image_url,
+    whatsapp: apiClinic.contact_whatsapp,
+    telefone: apiClinic.contact_phone,
+    email: apiClinic.contact_email,
+  };
+}
+
+async function getClinicById(clinicaId) {
+  const response = await fetch('/api/clinics', { credentials: 'include' });
+  if (!response.ok) {
+    throw new Error('Falha ao carregar clínicas.');
   }
-];
+  const data = await response.json();
+  const clinics = Array.isArray(data) ? data.map(mapClinic) : [];
+  return clinics.find(c => c.id === clinicaId) || null;
+}
 
 document.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  let clinicaId = params.get("clinica") || localStorage.getItem("selectedClinica");
+  (async () => {
+    const params = new URLSearchParams(window.location.search);
+    const clinicaId = params.get("clinica") || localStorage.getItem("selectedClinica");
 
-  const clinica = clinicas.find(c => c.id === clinicaId);
-  if (!clinica) {
-    console.warn("Nenhuma clínica encontrada. Parâmetro ausente:", clinicaId);
-    return;
-  }
+    if (!clinicaId) {
+      console.warn("Nenhuma clínica encontrada. Parâmetro ausente.");
+      return;
+    }
 
-  localStorage.setItem("selectedClinica", clinica.id);
-  document.getElementById("ct-nome").textContent = clinica.nome;
-  document.getElementById("ct-img").src = clinica.imagem;
-  document.getElementById("ct-endereco").innerHTML = `<strong>${clinica.endereco}</strong>`;
-  document.getElementById("ct-horario").textContent = clinica.horario;
-  document.getElementById("ct-descricao").textContent = clinica.descricao;
+    let clinica = null;
+    try {
+      clinica = await getClinicById(clinicaId);
+    } catch (err) {
+      console.warn("Falha ao carregar clínica:", err);
+      return;
+    }
 
-  document.getElementById("btnLigar").onclick = () => {
-    window.location.href = `tel:${clinica.telefone}`;
-  };
+    if (!clinica) {
+      console.warn("Nenhuma clínica encontrada. Parâmetro ausente:", clinicaId);
+      return;
+    }
 
-  document.getElementById("btnWhatsapp").onclick = () => {
-    window.open(`https://wa.me/${clinica.whatsapp}`, "_blank");
-  };
+    localStorage.setItem("selectedClinica", clinica.id);
+    document.getElementById("ct-nome").textContent = clinica.nome;
+    document.getElementById("ct-img").src = clinica.imagem;
+    document.getElementById("ct-endereco").innerHTML = `<strong>${clinica.endereco}</strong>`;
+    document.getElementById("ct-horario").textContent = clinica.horario;
+    document.getElementById("ct-descricao").textContent = clinica.descricao;
 
-  document.getElementById("btnEmail").onclick = () => {
-    window.location.href = `mailto:${clinica.email}`;
-  };
+    document.getElementById("btnLigar").onclick = () => {
+      window.location.href = `tel:${clinica.telefone}`;
+    };
 
-  console.log("[contato.js] Card carregado para:", clinica.nome);
+    document.getElementById("btnWhatsapp").onclick = () => {
+      window.open(`https://wa.me/${clinica.whatsapp}`, "_blank");
+    };
+
+    document.getElementById("btnEmail").onclick = () => {
+      window.location.href = `mailto:${clinica.email}`;
+    };
+
+    console.log("[contato.js] Card carregado para:", clinica.nome);
+  })();
 });
 
 document.addEventListener("DOMContentLoaded", () => {

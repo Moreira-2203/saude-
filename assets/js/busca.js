@@ -1,22 +1,31 @@
 
-const clinicas = [
-  {
-    id: "clinicamulher",
-    nome: "Clínica da Mulher",
-    endereco: "Tv. Arildo Ferreira Da Silva, 5 - Barreira",
-    horario: "07h da manhã às 17h da tarde",
-    descricao: "Clínica Municipal especializada em Atenção Integral à Saúde da Mulher do município de Saquarema.",
-    imagem: "../../assets/img/clinicadamulher.jpg",
-  },
-  {
-    id: "capsad",
-    nome: "Centro de Atenção Psicossocial de Saquarema – CAPS AD",
-    endereco: "Rua Adolfo Bravo, n° 28 - Bacaxá",
-    horario: "08h da manhã às 17h da tarde",
-    descricao: "Clínica de Saúde especializada em atendimento psicossocial, oferecendo suporte, acompanhamento e cuidado em saúde mental aos moradores de Saquarema.",
-    imagem: "../../assets/img/caps.png",
-  },
-];
+let clinicsCache = null;
+
+function mapClinic(apiClinic) {
+  return {
+    id: apiClinic.id,
+    nome: apiClinic.name,
+    endereco: apiClinic.address,
+    horario: apiClinic.hours,
+    descricao: apiClinic.description,
+    imagem: apiClinic.image_url,
+  };
+}
+
+async function loadClinics() {
+  const response = await fetch('/api/clinics', { credentials: 'include' });
+  if (!response.ok) {
+    throw new Error('Falha ao carregar clínicas.');
+  }
+  const data = await response.json();
+  return Array.isArray(data) ? data.map(mapClinic) : [];
+}
+
+async function getClinics() {
+  if (clinicsCache) return clinicsCache;
+  clinicsCache = await loadClinics();
+  return clinicsCache;
+}
 
 function criarCard(clinica) {
   return `
@@ -51,17 +60,25 @@ function criarCard(clinica) {
 }
 
 
-function buscarClinica() {
+async function buscarClinica() {
   const termo = document.getElementById("search-input").value.toLowerCase().trim();
   const cardsContainer = document.getElementById("cards");
 
   cardsContainer.innerHTML = "";
 
   if (!termo) return;
+  let clinicas = [];
+  try {
+    clinicas = await getClinics();
+  } catch (err) {
+    cardsContainer.innerHTML = `
+      <p style="text-align:center; padding:20px; font-size:18px;">
+        Não foi possível carregar as clínicas.
+      </p>`;
+    return;
+  }
 
-  const resultados = clinicas.filter(c =>
-    c.nome.toLowerCase().includes(termo)
-  );
+  const resultados = clinicas.filter(c => c.nome.toLowerCase().includes(termo));
 
   if (resultados.length > 0) {
     resultados.forEach(clinica => {
@@ -75,7 +92,9 @@ function buscarClinica() {
   }
 }
 
-document.getElementById("search-btn").addEventListener("click", buscarClinica);
+document.getElementById("search-btn").addEventListener("click", () => {
+  buscarClinica();
+});
 document.getElementById("search-input").addEventListener("keypress", (e) => {
   if (e.key === "Enter") buscarClinica();
 });
@@ -84,6 +103,7 @@ document.getElementById("search-input").addEventListener("keypress", (e) => {
 document.addEventListener("click", (e) => {
   const btnAgendar = e.target.closest(".btn-agendar");
   const btnContato = e.target.closest(".btn-contato");
+  const btnMapa = e.target.closest(".btn-mapa");
 
   if (btnAgendar) {
     const id = btnAgendar.getAttribute("data-id");
@@ -96,6 +116,13 @@ document.addEventListener("click", (e) => {
     const id = btnContato.getAttribute("data-id");
     localStorage.setItem("selectedClinica", id);
     const url = `../../pages/dashboard/contato.html?clinica=${encodeURIComponent(id)}`;
+    window.location.href = url;
+  }
+
+  if (btnMapa) {
+    const id = btnMapa.getAttribute("data-id");
+    localStorage.setItem("selectedClinica", id);
+    const url = `../../pages/dashboard/localizacao.html?clinica=${encodeURIComponent(id)}`;
     window.location.href = url;
   }
 });

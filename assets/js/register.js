@@ -9,13 +9,26 @@ document.querySelectorAll('.password-wrapper i').forEach(icon => {
   });
 });
 
-async function gerarHash(texto) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(texto);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
-  return hashHex;
+async function apiRegister(payload) {
+  const response = await fetch('/api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    let message = 'Falha ao cadastrar.';
+    try {
+      const data = await response.json();
+      if (data && data.detail) message = data.detail;
+    } catch (err) {
+      message = 'Falha ao cadastrar.';
+    }
+    throw new Error(message);
+  }
+
+  return response.json();
 }
 
 document.getElementById("cadastro-btn").addEventListener("click", async () => {
@@ -40,19 +53,17 @@ document.getElementById("cadastro-btn").addEventListener("click", async () => {
     return;
   }
 
-  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-  const existe = usuarios.find(u => u.email === email);
-  if (existe) {
-    alert("Já existe um usuário cadastrado com esse e-mail!");
-    return;
+  try {
+    await apiRegister({
+      name: nome,
+      email,
+      password: senha,
+      role: 'paciente',
+    });
+    alert("Cadastro realizado com sucesso!");
+    window.location.href = "login.html";
+  } catch (err) {
+    const text = err instanceof Error ? err.message : 'Falha ao cadastrar.';
+    alert(text);
   }
-
-  const hashSenha = await gerarHash(senha);
-
-
-  usuarios.push({ nome, email, senha: hashSenha });
-  localStorage.setItem("usuarios", JSON.stringify(usuarios));
-
-  alert("Cadastro realizado com sucesso!");
-  window.location.href = "login.html";
 });
