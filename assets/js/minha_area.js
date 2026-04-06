@@ -1,4 +1,57 @@
-function carregarConsultas() {
+async function apiListAppointments() {
+  const response = await fetch('/api/appointments', { credentials: 'include' });
+  if (response.status === 401) {
+    throw new Error('Not authenticated');
+  }
+  if (!response.ok) {
+    throw new Error('Falha ao carregar consultas.');
+  }
+  return response.json();
+}
+
+async function apiListClinics() {
+  const response = await fetch('/api/clinics', { credentials: 'include' });
+  if (!response.ok) {
+    throw new Error('Falha ao carregar clínicas.');
+  }
+  return response.json();
+}
+
+async function apiUpdateAppointment(appointmentId, payload) {
+  const response = await fetch(`/api/appointments/${appointmentId}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(payload),
+  });
+
+  if (response.status === 401) {
+    throw new Error('Not authenticated');
+  }
+  if (!response.ok) {
+    let message = 'Falha ao atualizar consulta.';
+    try {
+      const data = await response.json();
+      if (data && data.detail) message = data.detail;
+    } catch (err) {
+      message = 'Falha ao atualizar consulta.';
+    }
+    throw new Error(message);
+  }
+
+  return response.json();
+}
+
+function formatStatus(status) {
+  const map = {
+    agendado: 'Agendado',
+    cancelado: 'Cancelado',
+    remarcado: 'Remarcado',
+  };
+  return map[status] || status;
+}
+
+async function carregarConsultas() {
   const lista = document.getElementById("lista-consultas");
   const msgSemConsultas = document.getElementById("sem-consultas");
   const agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || [];
